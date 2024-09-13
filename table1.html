@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .filter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 12px;
+        }
+
+        .filter-label {
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #333;
+        }
+
+        .filter-input {
+            padding: 8px 12px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-input:focus {
+            border-color: #c44250;
+            outline: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .data-sectiondulieu {
+            margin-bottom: 40px;
+        }
+
+        .data-sectiondulieu h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .data-itemdulieu {
+            margin-bottom: 20px;
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .data-itemdulieu h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        table {
+            margin-left: 30px;
+            /* width: 100%; */
+            min-width: 1000px;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #c44250;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        tr {
+            background-color: #f9f9f9;
+            transition: background-color 0.2s ease;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        /* Alternating row background */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Responsive table */
+        @media (max-width: 768px) {
+
+            table,
+            th,
+            td {
+                display: block;
+                width: 100%;
+            }
+
+            th,
+            td {
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+            }
+
+            tr {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Other styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 344px auto auto auto;
+            background-image: url(https://www.mpi.gov.vn/_layouts/mpi/img/bg-header-footer.png);
+            background-color: #c13d4b;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 120px;
+        }
+
+        .header-content h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .header-content h2 {
+            font-size: 18px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: white;
+            color: #d32f2f;
+        }
+
+        .data-section {
+            flex: 1;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .data-section h3 {
+            font-size: 22px;
+            color: #d32f2f;
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            /* position: absolute; */
+            bottom: 0;
+            width: 100%;
+            background-image: url(https://www.mpi.gov.vn/_layouts/mpi/img/bg-header-footer.png);
+            background-color: #c13d4b;
+            background-repeat: no-repeat;
+            background-position: center center;
+            text-align: center;
+            color: white;
+            padding: 20px 0;
+            font-family: Arial;
+            font-size: 14px;
+        }
+
+        .logo-d {
+            display: grid;
+        }
+
+        .thu {
+            display: grid;
+        }
+
+        .chu-logo {
+            align-self: end;
+            text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+            color: #c44250;
+            font-size: 32px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .chu-logo2 {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .logonew {
+            align-self: center;
+            margin-left: 230px;
+        }
+
+
+
+
+
+
+
+
+
+
+        .custom-select {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .custom-options {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            background-color: white;
+            z-index: 9;
+            display: none;
+        }
+
+        .custom-option {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .custom-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .custom-select.active .custom-options {
+            display: block;
+        }
+
+        .nav-tintuc {
+            background-color: #ffffff;
+            border-bottom: 2px solid #c44250;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-tintuc .ul-tintuc {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-tintuc .ul-tintuc .li-tintuc {
+            margin: 0 20px;
+        }
+
+        .nav-tintuc .ul-tintuc .li-tintuc .a-tintuc {
+            color: #394E79;
+            font-family: 'Merriweather';
+            text-decoration: none;
+            padding: 15px 20px;
+            display: inline-block;
+            transition: color 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .nav-tintuc .ul-tintuc .li-tintuc .a-tintuc:hover {
+            color: #c44250;
+            box-shadow: inset 0 -2px 0 #c44250;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #goalTable2 {
+            display: none;
+        }
+
+        #goalTable3 {
+            display: none;
+        }
+
+        #goalTable4 {
+            display: none;
+        }
+
+        #goalTable5 {
+            display: none;
+        }
+
+        #goalTable6 {
+            display: none;
+        }
+
+        #goalTable7 {
+            display: none;
+        }
+
+        #goalTable8 {
+            display: none;
+        }
+
+
+        .accordion {
+            width: 100%;
+            max-width: 400px;
+            margin: 73px auto;
+        }
+
+        .accordion-item {
+            background-color: #c44250;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: left;
+            /* text-transform: uppercase; */
+            border: 1px solid #c44250;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            /* background-color: #b13643; */
+            background-color: #902934;
+        }
+
+        .accordion-toggle {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .accordion-header span {
+            margin: 0;
+        }
+
+        /* Optionally, add transitions for expanding content */
+        .accordion-content {
+            padding: 15px 20px;
+            border-top: 1px solid #ddd;
+            display: none;
+            /* Initially hidden */
+            background-color: white;
+            color: #333;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .accordion {
+                max-width: 100%;
+            }
+
+            .accordion-header {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo-d">
+            <a class="logonew" href="C:\Users\Mindu\Desktop\CTMTQG\CTMTQG.html">
+                <img src="https://www.mpi.gov.vn/_layouts/mpi/img/logo.svg" style="width: 78px;">
+            </a>
+        </div>
+        <div class="thu">
+            <div class="chu-logo">BỘ KẾ HOẠCH VÀ ĐẦU TƯ</div>
+            <div class="chu-logo2">CHƯƠNG TRÌNH MỤC TIÊU QUỐC GIA</div>
+        </div>
+    </div>
+
+    <div class="data-sectiondulieu">
+        <nav class="nav-tintuc">
+            <ul class="ul-tintuc">
+                <li class="li-tintuc"><a class="a-tintuc" href="/">Menu</a></li>
+                <li class="li-tintuc"><a class="a-tintuc" href="#aboutusdad">Menu</a></li>
+                <li class="li-tintuc"><a class="a-tintuc" href="http://ducvdsv5c:92/Pages/vanban.aspx">Menu</a></li>
+                <li class="li-tintuc"><a class="a-tintuc" href="#thongbao" id="myBtn">Menu</a></li>
+                <li class="li-tintuc"><a class="a-tintuc" href="http://ducvdsv5c:92/Pages/ketqua.aspx">Menu</a></li>
+                <li class="li-tintuc"><a class="a-tintuc" href="chuyenmuctin.aspx?idcm=65">Menu</a></li>
+            </ul>
+        </nav>
+        
+
+        <div class="data-itemdulieu">
+            <div class="accordion">
+                <div class="accordion-item" role="goalTable1">
+                    <div class="accordion-header">
+                        <span>Dữ liệu về giao, điều chỉnh, bổ sung mục tiêu, nhiệm vụ</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable2">
+                    <div class="accordion-header">
+                        <span>Dữ liệu về giao, điều chỉnh, bổ sung kế hoạch đầu tư công trung hạn</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable3">
+                    <div class="accordion-header">
+                        <span>Dữ liệu về kết quả phân bổ, giải ngân vốn đầu tư công</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable4">
+                    <div class="accordion-header">
+                        <span>Thông tin về dự án đầu tư công</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable5">
+                    <div class="accordion-header">
+                        <span>Dữ liệu về kết quả thực hiện mục tiêu, nhiệm vụ của từng chương trình</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable6">
+                    <div class="accordion-header">
+                        <span>Dữ liệu về kết quả thực hiện mục
+                            tiêu, nhiệm vụ của từng dự án thành phần</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable7">
+                    <div class="accordion-header">
+                        <span>Chỉ tiêu đầu vào, đầu ra, chỉ số
+                            đánh giá tình hình triển khai, kết quả thực hiện, đánh giá tác động của từng chương
+                            trình</span>
+                    </div>
+                </div>
+                <div class="accordion-item" role="goalTable8">
+                    <div class="accordion-header">
+                        <span>Kết quả xây dựng văn bản quản
+                            lý, điều hành, tổ chức thực hiện các chương trình mục tiêu quốc gia tại các cấp và tài liệu
+                            có liên quan
+                            đến kết quả kiểm toán, thanh tra, việc thực hiện kết luận của kiểm toán, thanh tra</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tables -->
+            <div id="goalTable1" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã Mục tiêu</th>
+                            <th>Tên Mục tiêu</th>
+                            <th>Ngày Điều chỉnh</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MT001</td>
+                            <td>Mục tiêu Phát triển Kinh tế</td>
+                            <td>01/01/2023</td>
+                            <td>Đã điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>  <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="goalTable2" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã Kế hoạch</th>
+                            <th>Tên Kế hoạch</th>
+                            <th>Thời gian Thực hiện</th>
+                            <th>Ngân sách</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>KH001</td>
+                            <td>Phát triển Hạ tầng Giao thông</td>
+                            <td>2021-2025</td>
+                            <td>10,000 tỷ VND</td>
+                        </tr>
+                        <tr>
+                            <td>KH002</td>
+                            <td>Đầu tư Năng lượng Tái tạo</td>
+                            <td>2022-2026</td>
+                            <td>8,000 tỷ VND</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="goalTable3" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table id="disbursementTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Giải ngân</th>
+                            <th>Tên Dự án</th>
+                            <th>Số tiền Giải ngân</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GN001</td>
+                            <td>Dự án Phát triển Cơ sở hạ tầng</td>
+                            <td>2,000 tỷ VND</td>
+                            <td>Đã giải ngân</td>
+                        </tr>
+                        <tr>
+                            <td>GN002</td>
+                            <td>Dự án Môi trường</td>
+                            <td>1,500 tỷ VND</td>
+                            <td>Chưa giải ngân</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="goalTable4" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table id="projectTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Dự án</th>
+                            <th>Tên Dự án</th>
+                            <th>Ngày Bắt đầu</th>
+                            <th>Ngày Kết thúc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DA001</td>
+                            <td>Dự án Xây dựng Cầu Đường</td>
+                            <td>01/02/2022</td>
+                            <td>30/06/2025</td>
+                        </tr>
+                        <tr>
+                            <td>DA002</td>
+                            <td>Dự án Nâng cấp Hệ thống Điện</td>
+                            <td>15/04/2023</td>
+                            <td>30/12/2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="goalTable5" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table id="programTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Chương trình</th>
+                            <th>Tên Chương trình</th>
+                            <th>Kết quả Thực hiện</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CT001</td>
+                            <td>Chương trình Xây dựng Nông thôn mới</td>
+                            <td>Hoàn thành 80%</td>
+                        </tr>
+                        <tr>
+                            <td>CT002</td>
+                            <td>Chương trình Phát triển Giáo dục</td>
+                            <td>Hoàn thành 60%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="goalTable6" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table id="componentTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Dự án Thành phần</th>
+                            <th>Tên Dự án Thành phần</th>
+                            <th>Kết quả Thực hiện</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DT001</td>
+                            <td>Dự án Xây dựng Cơ sở Hạ tầng Nông thôn</td>
+                            <td>Hoàn thành 75%</td>
+                        </tr>
+                        <tr>
+                            <td>DT002</td>
+                            <td>Dự án Cải cách Giáo dục</td>
+                            <td>Hoàn thành 50%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="goalTable7" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table id="indicatorTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Chỉ tiêu</th>
+                            <th>Tên Chỉ tiêu</th>
+                            <th>Giá trị Đầu vào</th>
+                            <th>Giá trị Đầu ra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CI001</td>
+                            <td>Chỉ tiêu Phát triển Kinh tế</td>
+                            <td>10 tỷ VND</td>
+                            <td>8 tỷ VND</td>
+                        </tr>
+                        <tr>
+                            <td>CI002</td>
+                            <td>Chỉ tiêu Giáo dục</td>
+                            <td>5 tỷ VND</td>
+                            <td>3 tỷ VND</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="goalTable8" class="table-content">
+                <div class="filter">
+                    <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                    <div class="custom-select">
+                        <input type="text" class="search-box" placeholder="Search...">
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="1">Option 1</div>
+                            <div class="custom-option" data-value="2">Option 2</div>
+                            <div class="custom-option" data-value="3">Option 3</div>
+                            <div class="custom-option" data-value="4">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+                <table id="documentTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Văn bản</th>
+                            <th>Tên Văn bản</th>
+                            <th>Ngày Ban hành</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VB001</td>
+                            <td>Văn bản Điều hành Kế hoạch Năm 2023</td>
+                            <td>10/01/2023</td>
+                            <td>Đã ban hành</td>
+                        </tr>
+                        <tr>
+                            <td>VB002</td>
+                            <td>Tài liệu Kiểm toán Dự án Xây dựng Cầu Đường</td>
+                            <td>15/05/2023</td>
+                            <td>Đang phê duyệt</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>BỘ KẾ HOẠCH VÀ ĐẦU TƯ - Địa chỉ: 6B đường Hoàng Diệu, quận Ba Đình, Thành phố Hà Nội</p>
+        <p>Điện thoại: 080.48474 | E-mail: cmpm@mpi.gov.vn | Website: https://data.mpi.gov.vn/</p>
+    </div>
+    <script>
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const role = item.getAttribute('role');
+                const currentTable = document.querySelector(`#${role}`);
+                const isCurrentlyVisible = currentTable.style.display === 'block';
+
+                // Đóng tất cả các bảng khác
+                document.querySelectorAll('.table-content').forEach(table => {
+                    if (table.id !== role) {
+                        table.style.display = 'none';
+                    }
+                });
+
+                // Chuyển đổi hiển thị của bảng hiện tại chỉ nếu nó không phải đã được mở
+                if (!isCurrentlyVisible) {
+                    currentTable.style.display = 'block';
+                }
+            });
+        });
+
+
+
+
+
+
+        const searchBox = document.querySelector('.search-box');
+        const optionsContainer = document.querySelector('.custom-options');
+        const optionsList = document.querySelectorAll('.custom-option');
+
+        // Lọc danh sách tùy chọn theo từ khóa người dùng nhập
+        searchBox.addEventListener('input', function () {
+            const filter = searchBox.value.toLowerCase();
+            let hasVisibleOption = false;
+
+            optionsList.forEach(option => {
+                const text = option.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    option.style.display = 'block';
+                    hasVisibleOption = true;
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+
+            // Hiển thị danh sách tùy chọn nếu có ít nhất một tùy chọn phù hợp
+            optionsContainer.style.display = hasVisibleOption ? 'block' : 'none';
+        });
+
+        // Chọn tùy chọn khi người dùng nhấp vào
+        optionsList.forEach(option => {
+            option.addEventListener('click', function () {
+                searchBox.value = option.textContent;
+                optionsContainer.style.display = 'none'; // Ẩn danh sách sau khi chọn
+            });
+        });
+
+        // Đóng danh sách khi nhấp ra ngoài vùng chọn
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.custom-select')) {
+                optionsContainer.style.display = 'none';
+            }
+        });
+
+        // Hiển thị danh sách tùy chọn khi ô tìm kiếm được focus
+        searchBox.addEventListener('focus', function () {
+            optionsContainer.style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .data-section {
+            margin-bottom: 40px;
+        }
+
+        .data-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .data-item {
+            margin-bottom: 20px;
+        }
+
+        .data-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quản lý Dữ liệu Chương trình Mục tiêu Quốc gia</h1>
+
+        // Bộ lọc cho Mục tiêu và Nhiệm vụ 
+        <div class="data-section">
+            <h2>Dữ liệu về Mục tiêu và Nhiệm vụ</h2>
+            <div class="filter">
+                <label for="filterGoal">Tìm kiếm Mục tiêu:</label>
+                <input type="text" id="filterGoal" placeholder="Nhập mã hoặc tên mục tiêu"
+                    oninput="filterTable('goalTable', 'filterGoal')">
+            </div>
+            <div class="data-item">
+                <h3>Giao, Điều chỉnh, Bổ sung Mục tiêu</h3>
+                <table id="goalTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Mục tiêu</th>
+                            <th>Tên Mục tiêu</th>
+                            <th>Ngày Điều chỉnh</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MT001</td>
+                            <td>Mục tiêu Phát triển Kinh tế</td>
+                            <td>01/01/2023</td>
+                            <td>Đã điều chỉnh</td>
+                        </tr>
+                        <tr>
+                            <td>MT002</td>
+                            <td>Mục tiêu Phát triển Nông nghiệp</td>
+                            <td>15/03/2023</td>
+                            <td>Chưa điều chỉnh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="data-item">
+                <h3>Kế hoạch Đầu tư Công Trung Hạn</h3>
+                <div class="filter">
+                    <label for="filterPlan">Tìm kiếm Kế hoạch:</label>
+                    <input type="text" id="filterPlan" placeholder="Nhập mã hoặc tên kế hoạch"
+                        oninput="filterTable('planTable', 'filterPlan')">
+                </div>
+                <table id="planTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Kế hoạch</th>
+                            <th>Tên Kế hoạch</th>
+                            <th>Thời gian Thực hiện</th>
+                            <th>Ngân sách</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>KH001</td>
+                            <td>Phát triển Hạ tầng Giao thông</td>
+                            <td>2021-2025</td>
+                            <td>10,000 tỷ VND</td>
+                        </tr>
+                        <tr>
+                            <td>KH002</td>
+                            <td>Đầu tư Năng lượng Tái tạo</td>
+                            <td>2022-2026</td>
+                            <td>8,000 tỷ VND</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        // Bộ lọc cho Phân bổ và Giải ngân Vốn 
+        <div class="data-section">
+            <h2>Kết quả Phân bổ và Giải ngân Vốn</h2>
+            <div class="filter">
+                <label for="filterAllocation">Tìm kiếm Phân bổ Vốn:</label>
+                <input type="text" id="filterAllocation" placeholder="Nhập mã hoặc tên chương trình"
+                    oninput="filterTable('allocationTable', 'filterAllocation')">
+            </div>
+            <div class="data-item">
+                <h3>Kết quả Phân bổ Vốn</h3>
+                <table id="allocationTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Phân bổ</th>
+                            <th>Tên Chương trình</th>
+                            <th>Ngân sách Phân bổ</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PB001</td>
+                            <td>Phát triển Công nghiệp</td>
+                            <td>5,000 tỷ VND</td>
+                            <td>Đã phân bổ</td>
+                        </tr>
+                        <tr>
+                            <td>PB002</td>
+                            <td>Phát triển Giáo dục</td>
+                            <td>3,500 tỷ VND</td>
+                            <td>Chưa phân bổ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="data-item">
+                <h3>Kết quả Giải ngân Vốn</h3>
+                <div class="filter">
+                    <label for="filterDisbursement">Tìm kiếm Giải ngân Vốn:</label>
+                    <input type="text" id="filterDisbursement" placeholder="Nhập mã hoặc tên dự án"
+                        oninput="filterTable('disbursementTable', 'filterDisbursement')">
+                </div>
+                <table id="disbursementTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Giải ngân</th>
+                            <th>Tên Dự án</th>
+                            <th>Số tiền Giải ngân</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GN001</td>
+                            <td>Dự án Phát triển Cơ sở hạ tầng</td>
+                            <td>2,000 tỷ VND</td>
+                            <td>Đã giải ngân</td>
+                        </tr>
+                        <tr>
+                            <td>GN002</td>
+                            <td>Dự án Môi trường</td>
+                            <td>1,500 tỷ VND</td>
+                            <td>Chưa giải ngân</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+      // Bộ lọc cho Dự án Đầu tư Công 
+        <div class="data-section">
+            <h2>Dự án Đầu tư Công</h2>
+            <div class="filter">
+                <label for="filterProject">Tìm kiếm Dự án:</label>
+                <input type="text" id="filterProject" placeholder="Nhập mã hoặc tên dự án"
+                    oninput="filterTable('projectTable', 'filterProject')">
+            </div>
+            <div class="data-item">
+                <h3>Thông tin về Dự án Đầu tư Công</h3>
+                <table id="projectTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Dự án</th>
+                            <th>Tên Dự án</th>
+                            <th>Ngày Bắt đầu</th>
+                            <th>Ngày Kết thúc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DA001</td>
+                            <td>Dự án Xây dựng Cầu Đường</td>
+                            <td>01/02/2022</td>
+                            <td>30/06/2025</td>
+                        </tr>
+                        <tr>
+                            <td>DA002</td>
+                            <td>Dự án Nâng cấp Hệ thống Điện</td>
+                            <td>15/04/2023</td>
+                            <td>30/12/2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        // Bộ lọc cho Kết quả Thực hiện Mục tiêu 
+        <div class="data-section">
+            <h2>Kết quả Thực hiện Mục tiêu</h2>
+            <div class="filter">
+                <label for="filterProgram">Tìm kiếm Chương trình:</label>
+                <input type="text" id="filterProgram" placeholder="Nhập mã hoặc tên chương trình"
+                    oninput="filterTable('programTable', 'filterProgram')">
+            </div>
+            <div class="data-item">
+                <h3>Theo Chương trình</h3>
+                <table id="programTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Chương trình</th>
+                            <th>Tên Chương trình</th>
+                            <th>Kết quả Thực hiện</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CT001</td>
+                            <td>Chương trình Xây dựng Nông thôn mới</td>
+                            <td>Hoàn thành 80%</td>
+                        </tr>
+                        <tr>
+                            <td>CT002</td>
+                            <td>Chương trình Phát triển Giáo dục</td>
+                            <td>Hoàn thành 60%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="data-item">
+                <h3>Theo Dự án Thành phần</h3>
+                <div class="filter">
+                    <label for="filterComponent">Tìm kiếm Dự án Thành phần:</label>
+                    <input type="text" id="filterComponent" placeholder="Nhập mã hoặc tên dự án thành phần"
+                        oninput="filterTable('componentTable', 'filterComponent')">
+                </div>
+                <table id="componentTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Dự án Thành phần</th>
+                            <th>Tên Dự án Thành phần</th>
+                            <th>Kết quả Thực hiện</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DT001</td>
+                            <td>Dự án Xây dựng Cơ sở Hạ tầng Nông thôn</td>
+                            <td>Hoàn thành 75%</td>
+                        </tr>
+                        <tr>
+                            <td>DT002</td>
+                            <td>Dự án Cải cách Giáo dục</td>
+                            <td>Hoàn thành 50%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       // Bộ lọc cho Chỉ tiêu Đầu vào/Đầu ra 
+        <div class="data-section">
+            <h2>Chỉ tiêu Đầu vào/Đầu ra</h2>
+            <div class="filter">
+                <label for="filterIndicator">Tìm kiếm Chỉ tiêu:</label>
+                <input type="text" id="filterIndicator" placeholder="Nhập mã hoặc tên chỉ tiêu"
+                    oninput="filterTable('indicatorTable', 'filterIndicator')">
+            </div>
+            <div class="data-item">
+                <h3>Chỉ tiêu Đầu vào/Đầu ra và Đánh giá</h3>
+                <table id="indicatorTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Chỉ tiêu</th>
+                            <th>Tên Chỉ tiêu</th>
+                            <th>Giá trị Đầu vào</th>
+                            <th>Giá trị Đầu ra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CI001</td>
+                            <td>Chỉ tiêu Phát triển Kinh tế</td>
+                            <td>10 tỷ VND</td>
+                            <td>8 tỷ VND</td>
+                        </tr>
+                        <tr>
+                            <td>CI002</td>
+                            <td>Chỉ tiêu Giáo dục</td>
+                            <td>5 tỷ VND</td>
+                            <td>3 tỷ VND</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+      //Bộ lọc cho Văn bản Quản lý và Kiểm toán 
+        <div class="data-section">
+            <h2>Văn bản Quản lý và Kiểm toán</h2>
+            <div class="filter">
+                <label for="filterDocument">Tìm kiếm Văn bản:</label>
+                <input type="text" id="filterDocument" placeholder="Nhập mã hoặc tên văn bản"
+                    oninput="filterTable('documentTable', 'filterDocument')">
+            </div>
+            <div class="data-item">
+                <h3>Thông tin về Văn bản Quản lý và Kiểm toán</h3>
+                <table id="documentTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Văn bản</th>
+                            <th>Tên Văn bản</th>
+                            <th>Ngày Ban hành</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VB001</td>
+                            <td>Văn bản Điều hành Kế hoạch Năm 2023</td>
+                            <td>10/01/2023</td>
+                            <td>Đã ban hành</td>
+                        </tr>
+                        <tr>
+                            <td>VB002</td>
+                            <td>Tài liệu Kiểm toán Dự án Xây dựng Cầu Đường</td>
+                            <td>15/05/2023</td>
+                            <td>Đang phê duyệt</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html> -->
